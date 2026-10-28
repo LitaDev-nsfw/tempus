@@ -204,6 +204,9 @@ public class AlbumListPageFragment extends Fragment implements ClickCallback {
             } else if (menuItem.getItemId() == R.id.menu_horizontal_album_sort_least_recently_starred) {
                 albumHorizontalAdapter.sort(Constants.ALBUM_ORDER_BY_LEAST_RECENTLY_STARRED);
                 return true;
+            } else if (menuItem.getItemId() == R.id.menu_horizontal_album_sort_artist) {
+                albumHorizontalAdapter.sort(Constants.ALBUM_ORDER_BY_ARTIST);
+                return true;
             }
 
             return false;

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 public class AlbumHorizontalAdapter extends RecyclerView.Adapter<AlbumHorizontalAdapter.ViewHolder> implements Filterable {
     private final ClickCallback click;
@@ -153,6 +154,13 @@ public class AlbumHorizontalAdapter extends RecyclerView.Adapter<AlbumHorizontal
             case Constants.ALBUM_ORDER_BY_LEAST_RECENTLY_STARRED:
                 albums.sort(Comparator.comparing(AlbumID3::getStarred, Comparator.nullsLast(Comparator.naturalOrder())));
 
+                break;
+            case Constants.ALBUM_ORDER_BY_ARTIST:
+                Function<AlbumID3, String> getArtist = album -> album.getArtist() != null ? album.getArtist() : "";
+                albums.sort(Comparator.comparing(
+                        getArtist,
+                        String.CASE_INSENSITIVE_ORDER
+                ).thenComparing(AlbumID3::getName));
                 break;
         }
 
